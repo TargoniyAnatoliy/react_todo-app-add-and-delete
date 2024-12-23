@@ -40,6 +40,10 @@ export const TodoHeader: React.FC<Props> = ({
     }
   }, [todosLength, inputRef, isInputDisabled]);
 
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <header className="todoapp__header">
       <button
@@ -57,9 +61,7 @@ export const TodoHeader: React.FC<Props> = ({
           placeholder="What needs to be done?"
           ref={inputRef}
           value={inputValue}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setInputValue(event.target.value)
-          }
+          onChange={onChange}
           disabled={isInputDisabled}
         />
       </form>

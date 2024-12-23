@@ -155,8 +155,8 @@ export const App: React.FC = () => {
               filteredTodos={filteredTodos}
               loadingTodoIds={loadingTodoIds}
               tempTodo={tempTodo}
-              removeTodo={onRemoveTodo}
-              updateTodo={onUpdateTodo}
+              onRemoveTodo={onRemoveTodo}
+              onUpdateTodo={onUpdateTodo}
             />
 
             <TodoFooter

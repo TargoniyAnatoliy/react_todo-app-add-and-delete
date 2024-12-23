@@ -6,8 +6,8 @@ type Props = {
   todo: Todo;
   isLoading?: boolean;
   inEditedMode?: boolean;
-  removeTodo: (todoId: number) => Promise<void>;
-  updateTodo: (todo: Todo) => Promise<void>;
+  onRemoveTodo: (todoId: number) => Promise<void>;
+  onUpdateTodo: (todo: Todo) => Promise<void>;
   setEditedTodoId: Dispatch<SetStateAction<null | number>>;
 };
 
@@ -15,8 +15,8 @@ export const TodoItem: React.FC<Props> = ({
   todo,
   isLoading,
   inEditedMode,
-  removeTodo,
-  updateTodo,
+  onRemoveTodo: onRemoveTodo,
+  onUpdateTodo: onUpdateTodo,
   setEditedTodoId,
 }) => {
   const [todoTitleValue, setTodoTitleValue] = useState(todo.title);
@@ -26,7 +26,7 @@ export const TodoItem: React.FC<Props> = ({
   const checkTodo = () => {
     const todoToUpdate = { ...todo, completed: !todo.completed };
 
-    updateTodo(todoToUpdate);
+    onUpdateTodo(todoToUpdate);
   };
 
   const editTodo = () => {
@@ -46,9 +46,9 @@ export const TodoItem: React.FC<Props> = ({
 
     try {
       if (normalizedTitle === '') {
-        await removeTodo(todo.id);
+        await onRemoveTodo(todo.id);
       } else {
-        await updateTodo({ ...todo, title: normalizedTitle });
+        await onUpdateTodo({ ...todo, title: normalizedTitle });
       }
 
       setEditedTodoId(null);
@@ -106,7 +106,7 @@ export const TodoItem: React.FC<Props> = ({
             type="button"
             className="todo__remove"
             data-cy="TodoDelete"
-            onClick={() => removeTodo(todo.id)}
+            onClick={() => onRemoveTodo(todo.id)}
           >
             ×
           </button>
